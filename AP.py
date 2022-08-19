@@ -2,10 +2,11 @@ import turtle  # for graphics
 import os
 import sys  # the other 4 imports are for end screen/restart
 import subprocess
-import easygui
+import easygui # for start screen
 
 # start screen for the game
-yn1 = easygui.ynbox('Instructions: Get through the maze to the red square\n\nStart game?', 'START?', ['Yes', 'No'])
+yn1 = easygui.ynbox('Instructions: Get through the maze to the red square\nControls: W - up S - down D - right '
+                    'a - left\n\nStart game?', 'START?', ['Yes', 'No'])
 if yn1 != True:
     exit()
 
@@ -48,7 +49,7 @@ class Char(turtle.Turtle):
         self.color("red")
         self.speed(0)
 
-    def up_w(self):
+    def up_w(self):  # for up movement
         if (self.xcor(), self.ycor() + 24) not in walls:
             self.goto(self.xcor(), self.ycor() + 24)
         if (self.xcor(), self.ycor() + 24) in endblocks:
@@ -56,7 +57,7 @@ class Char(turtle.Turtle):
             self.hideturtle()
             endscreen()
 
-    def left_a(self):
+    def left_a(self):  # for left movement
         if (self.xcor() - 24, self.ycor()) not in walls:
             self.goto(self.xcor() - 24, self.ycor())
         if (self.xcor() - 24 , self.ycor()) in endblocks:
@@ -64,7 +65,7 @@ class Char(turtle.Turtle):
             self.hideturtle()
             endscreen()
 
-    def right_d(self):
+    def right_d(self):  # for right movement
         if (self.xcor() + 24, self.ycor()) not in walls:
             self.goto(self.xcor() + 24, self.ycor())
         if (self.xcor() + 24 , self.ycor()) in endblocks:
@@ -72,7 +73,7 @@ class Char(turtle.Turtle):
             self.hideturtle()
             endscreen()
 
-    def down_s(self):
+    def down_s(self):  # for down movement
         if (self.xcor(), self.ycor() - 24) not in walls:
             self.goto(self.xcor(), self.ycor() - 24)
         if (self.xcor(), self.ycor() - 24) in endblocks:
@@ -88,25 +89,25 @@ levels = [""]
 
 # Format for first level
 level_1 = [
-"XXXXXXXXXXXXXXXXXXXXXXXXXXX",
-"XC XXXXXXXXXXXXXXXXXXXXXXXX",
-"X               XXXXXXXXXXX",
-"X  XXXXXXXXXXX  XXXXXXX  XX",
-"XXXXXXX                  XX",
-"XXXXXXX  XXXXXXXXXXXXXXXXXX",
-"XXXXXXX  XXXXX            X",
-"XXXXXXXX        XXXXXXXXXXX",
-"XXXXXXX  XXXXXXXXXXXXXXXXXX",
-"XXXX                      X",
-"X     XXXXXXXXXXXXXXX  XXXX",
-"XXXXXXXXXXXXXXXXXXXXX  XXXX",
-"XXXXXXXX               XXXX",
-"XXXXXXXX   XXXXXXXXXXXXXXXX",
-"XXXXXXXX  XXXXXXXXXXXXXXXXX",
-"X         XXXXXXXXXXXXXXXXX",
-"XXXXXXXX                 EX",
-"XXXXXXXX XXXXXXXXXXXXXXXXXX",
-"       XXX                 "
+"NNNNNNNNNNNNNNNNNNNNNNNNNNN",
+"NC NNNNNNNNNNNNNNNNNNNNNNNN",
+"N               NNNNNNNNNNN",
+"N  NNNNNNNNNNN  NNNNNNN  NN",
+"NNNNNNN                  NN",
+"NNNNNNN  NNNNNNNNNNNNNNNNNN",
+"NNNNNNN  NNNNN            N",
+"NNNNNNNN        NNNNNNNNNNN",
+"NNNNNNN  NNNNNNNNNNNNNNNNNN",
+"NNNN                      N",
+"N     NNNNNNNNNNNNNNN  NNNN",
+"NNNNNNNNNNNNNNNNNNNNN  NNNN",
+"NNNNNNNN               NNNN",
+"NNNNNNNN   NNNNNNNNNNNNNNNN",
+"NNNNNNNN  NNNNNNNNNNNNNNNNN",
+"N         NNNNNNNNNNNNNNNNN",
+"NNNNNNNN                 EN",
+"NNNNNNNN NNNNNNNNNNNNNNNNNN",
+"       NNN                 "
 ]
 
 # adds level_1 to list
@@ -134,7 +135,7 @@ def mazelvl(maze):
                 endblock.goto(screen_x, screen_y)
                 endblocks.append((screen_x, screen_y))
 
-            if drawer == "X":
+            if drawer == "N":
                 pen.goto(screen_x, screen_y)
                 pen.stamp()
 
@@ -162,10 +163,6 @@ def endscreen():
     win.exitonclick()
 
 
-
-
-
 # to keep the window running
 while True:
     win.update()
-
